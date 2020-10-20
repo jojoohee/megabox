@@ -55,6 +55,7 @@
 
       img {
         vertical-align: top;
+        width: 100%;
       }
 
       ul,ol,li {
@@ -86,21 +87,94 @@
         padding: 60px 0;
       }
 
-      
+      /* skip menu */
+      .skip-menu {
+        position: fixed;
+        left: 0;
+        top: -99999px;
+        z-index: 1;
+        background-color: #503396;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .skip-menu.active {
+        top: 0;
+      }
+
+      .skip-menu > a {
+        display: inline-block;
+        border: 2px solid #000;
+        border-radius: 5px;
+        padding: 6px 10px;
+        color: #fff;
+      }
+
+      /* 이부분 다시 확인 */
+      .banner01, .banner03 {
+        background-color: #4f79a9;
+        display: none;
+      }
+
+      .header {
+        height: 100px;
+        background-color: #503396;
+      }
+
+      .banner01 {
+        height: 100px;
+        background-color: #0066ff;
+      }
+
+      .box-office {
+        height: 500px;
+        background-color: yellow;
+      }
+
+      .event {
+        height: 500px;
+        background-color: lightcoral;
+      }
+
+      .curation {
+        height: 500px;
+        background-color: lightgreen;
+      }
+
+      .mega-info {
+        height: 500px;
+        background-color: lightgray;
+      }
+
+      .banner03 {
+        height: 100px;
+        background-color: lightgreen;
+      }
+
+      .footer {
+        height: 100px;
+        background-color: #503396;
+      }
+
+
       
       /* 768px tablet*/
-      @media screen and(min-width: 768px) {
-        .container {
+      @media(min-width: 768px) {
+      .container {
         width: 80%;
       }
       .content {
         padding: 50px 0;
       }
+
+      .banner01, .banner03 {
+        display: block;
+      }
       
     }
 
       /* 1280px pc*/
-      @media screen and(min-width: 1200px) {
+      @media(min-width: 1200px) {
         .content {
         padding: 60px 0;
       }
@@ -110,18 +184,26 @@
   </head>
   <body>
     <section class="skip-menu">
-      <a href="#">본문바로가기</a>
-      <a href="#">푸터바로가기</a>
+      <a href="#box-office">본문바로가기</a>
+      <a href="#footer">푸터바로가기</a>
     </section>
     <section class="wrap">
-      <section class="banner01"></section>
+      <section class="banner01">
+        <div class="container">
+          <img src="/imgs/hyundai-banner-top.jpg" alt="현대해상 배너">
+        </div>
+      </section>
       <header class="header"></header>
-      <section class="section box-office"></section>
+      <section class="section box-office" id="box-office"></section>
       <section class="section event"></section>
       <section class="section curation"></section>
       <section class="section mega-info"></section>
-      <section class="section banner03"></section>
-      <footer class="footer"></footer>
+      <section class="section banner03">
+        <div class="container">
+          <img src="/imgs/hyundai-banner.jpg" alt="현대해상 배너">
+        </div>
+      </section>
+      <footer class="footer" id="footer"></footer>
     </section>
 
     <!-- script -->
@@ -130,5 +212,23 @@
     <script src="js/swiper-bundle.min.js"></script>
     <!-- prefixfree -->
     <script src="js/prefixfree.min.js"></script>
+
+    <script>
+      $(function() {
+        var skip = $('.skip-menu a');
+        var skipMenu = $('.skip-menu');
+
+        skip.on({
+          focus: function(){
+            skipMenu.addClass('active');
+          },
+          blur: function(){
+            skipMenu.removeClass('active');
+          }
+        });
+
+        
+      });
+    </script>
   </body>
 </html>

@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
+
+<script>
+  // var scrWidth = screen.width;
+  // console.log(scrWidth);
+  // if(scrWidth>=1200) {
+  //   location.replace('pc.html');
+  // }
+</script>
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +21,7 @@
     />
     <meta poperty="og:description" content="메가박스" />
 
+    <meta name="twitter:card" content="summary"> 
     <meta poperty="twitter:title" content="megabox" />
     <meta poperty="twitter:url" content="깃허브 주소" />
     <meta
@@ -42,6 +52,8 @@
       * {
         box-sizing: border-box;
         font-family: "Roboto", "Noto Sans KR";
+        margin: 0;
+        padding: 0;
       }
 
       a {
@@ -68,12 +80,16 @@
         clear: both;
       }
 
-      .f_left {
+      .fleft {
         float: left;
       }
 
-      .f_right {
+      .fright {
         float: right;
+      }
+
+      html, body {
+        height: 100%;
       }
 
       .container {
@@ -84,7 +100,44 @@
       }
 
       .content {
-        padding: 60px 0;
+        padding: 40px 0;
+      }
+
+      /* title text */
+      .title01 {
+        font-weight: 800;
+        font-size: 2rem;
+      }
+
+      .title02 {
+        font-weight: 800;
+        font-size: 1.6rem;
+      }
+
+      .title03 {
+        font-weight: 800;
+        font-size: 1.2rem;
+      }
+
+      .title02 {
+        font-weight: 800;
+      }
+
+      /* content text */
+      .con-txt01 {
+        font-size: 1.6rem;
+      }
+
+      .con-txt02 {
+        font-size: 1.2rem;
+      }
+
+      .con-txt03 {
+        font-size: 0.8rem;
+      }
+
+      .con-txt04 {
+        font-size: 0.6rem;
       }
 
       /* skip menu */
@@ -93,6 +146,7 @@
         left: 0;
         top: -99999px;
         z-index: 1;
+        width: 100%;
         background-color: #503396;
         text-align: center;
         padding: 10px;
@@ -110,49 +164,294 @@
         color: #fff;
       }
 
-      /* 이부분 다시 확인 */
+      /* popup */
+      .popup {
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        z-index: 2;
+        background-color: rgba(0,0,0,0.8);
+        display: none;
+      }
+
+      .popup-content {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 400px;
+      }
+
+      .popup-form {
+        padding: 10px;
+        background-color: #fff;
+      }
+
+      #popup-close {
+        cursor: pointer;
+      }
+
+
+      /* banner top */
       .banner01, .banner03 {
         background-color: #4f79a9;
         display: none;
       }
 
+
+      /* header */
       .header {
-        height: 100px;
-        background-color: #503396;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background-color: transparent;
+        z-index: 1;
+        transition: 300ms;
       }
 
-      .banner01 {
-        height: 100px;
-        background-color: #0066ff;
+      .header.active {
+        background-color: rgba(0,0,0,0.7);        
       }
+
+      .header .content {
+        padding: 20px;
+      }
+
+      .header-main {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .before {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 10;
+        background-color: rgba(0,0,0,0.5);
+        display: none;
+      }
+
+      .ticket-box {
+        width: 50px;
+        cursor: pointer;
+      }
+
+      .logo-box {
+        width: 100px;
+      }
+
+      .burger-box {
+        cursor: pointer;
+      }
+
+      nav {
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 11;
+        width: 0;
+        height: 100vh;
+        background-color: #fff;
+      }
+
+      .nav-top {
+        background-color: #160f2b;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 12;
+        width: 100%;
+      }
+
+      .login, .join {
+        padding: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.5);
+        color: #fff;
+      }
+
+      .login a {
+        color: #fff;
+        font-weight: 700;
+        text-decoration: underline;
+      }
+
+      .login p {
+        padding-top: 6px;
+      }
+
+      .nav-close {
+        width: 30px;
+      }
+
+      .join a {
+        color: #fff;
+      }
+
+      .nav-main {
+        padding: 148px 20px 100px;
+        height: 100%;
+        overflow-y: scroll;
+      }
+
+      .nav-main::-webkit-scrollbar,
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-main,html,body {
+        -ms-overflow-style: none;
+      }
+
+      .main-nav {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-content: space-between;
+        height: 200px;
+        margin-bottom: 20px;
+      }
+
+      .main-nav li {
+        width: 32%;
+        text-align: center;
+      }
+
+      .main-nav img {
+        border: 1px solid gray;
+        border-radius: 50%;
+        width: 70%;
+      }
+
+      .main-nav p {
+        font-size: 0.9rem;
+        padding-top: 12px;
+        color: #333;
+      }
+
+      .sub-nav li {
+        border-top: 1px solid #eee;
+        padding: 16px 0;
+      }
+
+      .sub-nav li:last-child {
+        border-bottom: 1px solid #eee;
+      }
+
+      .sub-nav li a {
+        color: #333;
+      }
+
+      .not-scroll {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .nav-banner {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 12;
+        width: 100%;
+      }
+
+      /* box office */
 
       .box-office {
-        height: 500px;
-        background-color: yellow;
+        background-color: #000;
+        padding-top: 80px;
+        color: rgba(255,255,255,0.8);
       }
 
+      .box-office h2 {
+        padding-bottom: 20px;
+        line-height: 2.2rem;
+        font-weight: 300;
+      }
+
+      .box-office .hastag {
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      .box-office .hastag ul{
+        width: 300%;
+      }
+
+      .box-office .hastag li {
+        display: inline-block;
+        padding-right: 15px;
+      }
+
+      .box-office .hastag a{
+        color: rgba(255,255,255,0.6);
+        font-size: 0.8rem;
+        font-weight: 300;
+        text-decoration: none;
+      }
+
+      .box-office .hastag a.active {
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-decoration: underline;
+      }
+
+      .box-office .swiper-slide {
+        width: 200px;
+        height: 300px;
+        background-color: #fff;
+      }
+
+      /* .box-office::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-image: url('./images/bg-origin.png');
+        background-size: cover;
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+      } */
+
+
+
+      /* event */
       .event {
         height: 500px;
         background-color: lightcoral;
       }
 
+
+      /* curation */
       .curation {
         height: 500px;
         background-color: lightgreen;
       }
 
+      /* mega info */
       .mega-info {
         height: 500px;
         background-color: lightgray;
       }
 
-      .banner03 {
-        height: 100px;
-        background-color: lightgreen;
-      }
 
+      /* footer */
       .footer {
-        height: 100px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 0;
         background-color: #503396;
       }
 
@@ -167,44 +466,228 @@
         padding: 50px 0;
       }
 
-      .banner01, .banner03 {
-        display: block;
-      }
+    
       
     }
 
-      /* 1280px pc*/
-      @media(min-width: 1200px) {
-        .content {
-        padding: 60px 0;
-      }
-    }
+      
 
     </style>
   </head>
   <body>
+    <!-- skip menu -->
     <section class="skip-menu">
       <a href="#box-office">본문바로가기</a>
       <a href="#footer">푸터바로가기</a>
     </section>
     <section class="wrap">
+      <!-- popup -->
+      <section class="popup">
+        <article class="popup-content">
+          <div class="popup-img">
+            <img src="images/popup.jpg" alt="팝업이미지">
+          </div>
+          <div class="popup-form clearfix">
+            <div class="fleft">
+              <input type="checkbox" id="no-show">
+              <label for="no-show">다시 보지 않기</label>
+            </div>
+            <div class="fright">
+              <img id="popup-close" src="/images/btn-close.png" alt="팝업 닫기">
+            </div>
+          </div>  
+        </article>
+      </section>
+      <!-- banner -->
       <section class="banner01">
         <div class="container">
-          <img src="/imgs/hyundai-banner-top.jpg" alt="현대해상 배너">
+          <img src="/images/hyundai-banner-top.jpg" alt="현대해상 배너">
         </div>
       </section>
-      <header class="header"></header>
-      <section class="section box-office" id="box-office"></section>
+      <!-- header -->
+      <header class="header">
+        <div class="container">
+          <div class="content">
+            <div class="header-main">
+              <div class="before"></div>
+              <div class="ticket-box">
+                <img src="images/ticket.png" alt="티켓">
+              </div>
+              <div class="logo-box">
+                <a href="index.html">
+                  <img src="images/logo-white.png" alt="로고">
+                </a> 
+              </div>
+              <div class="burger-box">
+                <img src="images/burger-white.png" alt="토글버튼">
+              </div>
+            </div>
+            <nav>
+              <article class="nav-top">
+                <div class="login clearfix">
+                  <p class="fleft">
+                    <a href="#">로그인</a> 후 이용하세요!
+                  </p>
+                  <div class="nav-close fright">
+                    <img src="./images/ico-rnb-close.png" alt="네비닫기">
+                  </div>
+                </div>
+                <div class="join clearfix">
+                  <p class="fleft">
+                    <a href="#">
+                    회원가입
+                    </a>
+                  </p>
+                  <p class="fright">
+                    <a href="#">
+                    비회원 예매확인
+                    </a>
+                  </p>
+                </div>
+              </article>
+              <article class="nav-main">
+                <ul class="main-nav">
+                  <li>
+                    <a href="#">
+                      <img src="./images/ico-rnb-movie.png" alt="영화예매">
+                      <p>영화예매</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <img src="./images/ico-rnb-theater.png" alt="극장별 예매">
+                      <p>극장별 예매</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <img src="./images/ico-rnb-mymega.png" alt="나의 메가박스">
+                      <p>나의 메가박스</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <img src="./images/ico-rnb-post.png" alt="영화">
+                      <p>영화</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <img src="./images/ico-rnb-store.png" alt="스토어">
+                      <p>스토어</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <img src="./images/ico-rnb-event.png" alt="이벤트">
+                      <p>이벤트</p>
+                    </a>
+                  </li>
+                  
+                </ul>
+                <ul class="sub-nav">
+                  <li>
+                    <a href="#">극장안내</a>
+                  </li>
+                  <li>
+                    <a href="#">무비포스트</a>
+                  </li>
+                  <li>
+                    <a href="#">더 부티크 프라이빗 예매</a>
+                  </li>
+                  <li>
+                    <a href="#">제휴/할인 안내</a>
+                  </li>
+                  <li>
+                    <a href="#">멤버십 안내</a>
+                  </li>
+                  <li>
+                    <a href="#">고객센터</a>
+                  </li>
+                </ul>
+              </article>
+              <article class="nav-banner">
+                <img src="./images/hyundai-banner.jpg" alt="">
+              </article>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <!-- box office -->
+      <section class="section box-office" id="box-office">
+        <div class="container">
+          <div class="content">
+            <h2 class="title02">
+              선명한 화면과 섬세한 소리로<br/>
+              당신께 최고의 영화를
+            </h2>
+            <div class="hastag">
+              <ul>
+                <li><a href="#" class="con-txt03 active">#박스오피스</a></li>
+                <li><a href="#" class="con-txt03">#상영예정</a></li>
+                <li><a href="#" class="con-txt03">#돌비시네마</a></li>
+                <li><a href="#" class="con-txt03">#단독</a></li>
+                <li><a href="#" class="con-txt03">#오리지널티켓</a></li>
+                <li><a href="#" class="con-txt03">#빵원티켓</a></li>
+                <li><a href="#" class="con-txt03">#클소</a></li>
+                <li><a href="#" class="con-txt03">#필소</a></li>
+              </ul>
+            </div>
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">1</div>
+                <div class="swiper-slide">2</div>
+                <div class="swiper-slide">3</div>
+                <div class="swiper-slide">4</div>
+                <div class="swiper-slide">5</div>
+                <div class="swiper-slide">6</div>
+                <div class="swiper-slide">7</div>
+                <div class="swiper-slide">8</div>
+                <div class="swiper-slide">9</div>
+                <div class="swiper-slide">10</div>
+                <div class="swiper-slide">11</div>
+                <div class="swiper-slide">12</div>
+                <div class="swiper-slide">13</div>
+                <div class="swiper-slide">14</div>
+                <div class="swiper-slide">15</div>
+                <div class="swiper-slide">16</div>
+                <div class="swiper-slide">17</div>
+                <div class="swiper-slide">18</div>
+                <div class="swiper-slide">19</div>
+                <div class="swiper-slide">20</div>
+              </div>
+            </div>
+            <p class="con-txt04">
+              더 많은 영화보기
+              <div class="arrow-box">
+                <img src="./images/arrow.png" alt="더보기">
+              </div>
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- event -->
       <section class="section event"></section>
+      <!-- curation -->
       <section class="section curation"></section>
+      <!-- mega info -->
       <section class="section mega-info"></section>
+      <!--  -->
       <section class="section banner03">
         <div class="container">
-          <img src="/imgs/hyundai-banner.jpg" alt="현대해상 배너">
+          <img src="/images/hyundai-banner.jpg" alt="현대해상 배너">
         </div>
       </section>
-      <footer class="footer" id="footer"></footer>
+      <footer class="footer" id="footer">
+        <div class="container">
+          <div class="content">
+            footer
+          </div>
+        </div>
+      </footer>
     </section>
+
+
 
     <!-- script -->
     <script src="js/jquery.min.js"></script>
@@ -212,9 +695,12 @@
     <script src="js/swiper-bundle.min.js"></script>
     <!-- prefixfree -->
     <script src="js/prefixfree.min.js"></script>
+    <!-- cookie -->
+    <script src="js/jquery.cookie.min.js"></script>
 
     <script>
       $(function() {
+        // skip menu
         var skip = $('.skip-menu a');
         var skipMenu = $('.skip-menu');
 
@@ -227,8 +713,62 @@
           }
         });
 
-        
-      });
+        // popup
+        $('#popup-close').on('click', function(){
+          if($('#no-show').is(':checked')){
+            $.cookie('none-popup', 'yes', { expires: 3, path: '/' });
+          } 
+          $('.popup').hide();
+        });
+
+        if($.cookie('none-popup')=='yes') {
+          $('.popup').hide();
+        } else {
+          $('.popup').show();
+        }
+
+        // ticket-box click
+        $('.ticket-box').on('click',function(){
+          confirm('로그인 후 사용가능합니다.\n로그인 하시겠습니까?');
+        });
+
+        // show nav / close nav
+        $('.burger-box').on('click',function(){
+          $('nav').css('width',300);
+          $('html,body').addClass('not-scroll');
+          $('.before').show();
+        });
+        $('.nav-close').on('click',function(){
+          $('nav').css('width',0);
+          $('html,body').removeClass('not-scroll');
+          $('.before').hide();
+        });
+
+        // scroll
+        $(window).on('scroll',function(){
+          var scrTop = $(window).scrollTop();
+          var hrd = $('.header');
+          if(scrTop>0) {
+            hrd.addClass('active');
+          } else {
+            hrd.removeClass('active');
+          }
+        });
+
+         // box office hastag
+      $('.hastag a').on('click', function(){
+        $('.hastag a').removeClass('active');
+          $(this).addClass('active');
+        })
+
+      // swiper
+        var swiper = new Swiper('.swiper-container',{
+          spaceBetween:30,
+          slidesPerView:'auto',
+          speed:50
+        });
+  
+      })
     </script>
   </body>
 </html>
